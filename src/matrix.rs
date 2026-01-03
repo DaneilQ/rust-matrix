@@ -11,6 +11,8 @@ struct Character {
     y: i32,
     char: char,
     ready_to_delete: bool,
+    size: i32,
+    brightness: f32,
 }
 
 fn get_random_char() -> char {
@@ -21,16 +23,19 @@ fn get_random_char() -> char {
 
 impl Character {
     fn new() -> Self {
+        let size = rand::rng().random_range(CONFIG.min_font_size..CONFIG.max_font_size);
         Self {
             x: rand::rng().random_range(0..WINDOW.width),
             y: -50,
             char: get_random_char(),
             ready_to_delete: false,
+            size,
+            brightness: rand::rng().random_range(0.0..0.5),
         }
     }
 
     fn update(&mut self) {
-        self.y += CONFIG.speed;
+        self.y += CONFIG.speed * (self.size / 3);
         if self.y > WINDOW.height {
             self.ready_to_delete = true;
         }
@@ -41,8 +46,8 @@ impl Character {
             &self.char.to_string(),
             self.x,
             self.y,
-            CONFIG.font_size,
-            Color::GREEN.brightness(0.3),
+            self.size,
+            Color::GREEN.brightness(self.brightness),
         );
     }
 }

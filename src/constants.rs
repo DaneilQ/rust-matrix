@@ -11,8 +11,9 @@ pub const WINDOW: Window = Window {
 
 //This probably should go inside of a /matrix folder and utilize it locally for its config
 pub const CONFIG: Config = Config {
-    limit: 300,
-    speed: 15,
+    limit: 500,
+    speed: 2,
     alpha: 30,
-    font_size: 50,
+    min_font_size: 20,
+    max_font_size: 50,
 };
