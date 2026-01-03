@@ -35,6 +35,16 @@ impl Character {
             self.ready_to_delete = true;
         }
     }
+
+    pub fn draw(&self, drawable_rl: &mut RaylibTextureMode<'_, RaylibHandle>) {
+        drawable_rl.draw_text(
+            &self.char.to_string(),
+            self.x,
+            self.y,
+            50,
+            Color::GREEN.brightness(0.3),
+        );
+    }
 }
 
 pub struct Matrix {
@@ -54,6 +64,7 @@ impl Matrix {
             motion_blur,
         }
     }
+
     pub fn game_loop(&mut self, core: &mut Core) {
         let Core { rl, thread } = core;
         self.characters.retain(|char| !char.ready_to_delete);
@@ -72,13 +83,7 @@ impl Matrix {
 
         self.motion_blur.update_texture(rl, &thread, |txt| {
             for char in self.characters.as_slice() {
-                txt.draw_text(
-                    &char.char.to_string(),
-                    char.x,
-                    char.y,
-                    50,
-                    Color::GREEN.brightness(0.3),
-                );
+                char.draw(txt);
             }
         });
 
