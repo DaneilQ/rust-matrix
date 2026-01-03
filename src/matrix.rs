@@ -41,7 +41,7 @@ impl Character {
             &self.char.to_string(),
             self.x,
             self.y,
-            50,
+            CONFIG.font_size,
             Color::GREEN.brightness(0.3),
         );
     }

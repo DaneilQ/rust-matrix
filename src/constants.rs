@@ -14,4 +14,5 @@ pub const CONFIG: Config = Config {
     limit: 300,
     speed: 15,
     alpha: 30,
+    font_size: 50,
 };

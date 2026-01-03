@@ -9,4 +9,5 @@ pub struct Config {
     pub limit: usize,
     pub speed: i32,
     pub alpha: u8,
+    pub font_size: i32,
 }
