@@ -15,19 +15,13 @@ struct Character {
     brightness: f32,
 }
 
-fn get_random_char() -> char {
-    let chars = CHARS.as_bytes();
-    let index = rand::rng().random_range(0..chars.len());
-    chars[index] as char
-}
-
 impl Character {
     fn new() -> Self {
         let size = rand::rng().random_range(CONFIG.min_font_size..CONFIG.max_font_size);
         Self {
             x: rand::rng().random_range(0..WINDOW.width),
             y: -50,
-            char: get_random_char(),
+            char: Character::get_random_char(),
             ready_to_delete: false,
             size,
             brightness: rand::rng().random_range(0.0..0.5),
@@ -49,6 +43,12 @@ impl Character {
             self.size,
             Color::GREEN.brightness(self.brightness),
         );
+    }
+
+    fn get_random_char() -> char {
+        let chars = CHARS.as_bytes();
+        let index = rand::rng().random_range(0..chars.len());
+        chars[index] as char
     }
 }
 
